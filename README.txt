@@ -1,3 +1,9 @@
+# Starting Python HTTP server
+
+```python
+python3 -m http.server 8001
+```
+
 Phantom by HTML5 UP
 html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)

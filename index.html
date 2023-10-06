@@ -199,7 +199,7 @@
 						<div class="inner">
 							<section>
 								<h2>Get in touch</h2>
-								<form method="post" action="#">
+								<form method="post" action="https://wjfwlhbzbb.execute-api.eu-west-1.amazonaws.com/dev/submit">
 									<div class="fields">
 										<div class="field half">
 											<input type="text" name="name" id="name" placeholder="Name" />
@@ -240,6 +240,20 @@
 			</div>
 
 		<!-- Scripts -->
+		<script>
+			formElem.onsubmit = async (e) => {
+			  e.preventDefault();
+		  
+			  let response = await fetch('https://wjfwlhbzbb.execute-api.eu-west-1.amazonaws.com/dev/submit', {
+				method: 'POST',
+				message: new FormData(formElem)
+			  });
+		  
+			  let result = await response.json();
+		  
+			  alert(result.message);
+			};
+		  </script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
