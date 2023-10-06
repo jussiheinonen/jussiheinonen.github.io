@@ -1,0 +1,35 @@
+{
+    "common": {
+        "aws_region": "eu-west-1",
+        "tags": {
+            "Owner": "Jussi Heinonen",
+            "Project": "noooner-ltd",
+            "Environment": "dev"
+        }
+    },
+    "sns": {
+        "topic_name": "noooner-ltd-contact-form",
+        "subscriptions": {
+            "jussi": {
+                "protocol": "email",
+                "endpoint": "jussi.heinonen@noooner.ltd"
+            }
+
+        }
+    },
+    "apigw": {
+        "name": "receive-form-data",
+        "description": "REST API Gateway from OpenAPI definition receive-form-data.template.tf",
+        "stage_name": "dev",
+        "context_path": "submit",
+        "endpoint_configuration_types": ["REGIONAL"],
+        "openapi_template_path": "config/receive-form-data.template.tf",
+        "openapi_template_vars": {
+            "context_path": "submit"
+        },
+        "iam": {
+            "assume_role_identifiers": [ "apigateway.amazonaws.com", "sns.amazonaws.com" ]
+        }
+    }
+    
+}
