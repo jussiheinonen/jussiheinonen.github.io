@@ -9,6 +9,13 @@ paths:
       responses:
         200:
            description: "Form submission was successful"
+        302:
+          description: "302 response"
+          headers:
+            Location:
+              schema:
+                type: "string"
+          content: {}
         400:
            description: "400 Error. Please check logs"
         500:
@@ -26,9 +33,9 @@ paths:
           application/x-www-form-urlencoded: "#set($topic=\"${topic_arn}\")\n#set($msg=$input.body)\nAction=Publish&TopicArn=$util.urlEncode($topic)&Message=$util.urlEncode($msg)"
         responses:
           200: 
-            statusCode: 200
-            responseTemplates:
-              application/json: "{\"body\": \"Thank you. Your message has been sent. You may close this window.\"}"
+            statusCode: "302"
+            responseParameters:
+              method.response.header.Location: "'https://www.noooner.ltd/submit.html'"
           400:
             statusCode: 400
             responseTemplates:
