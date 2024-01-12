@@ -30,7 +30,7 @@ paths:
           integration.request.header.Content-Type: "'application/x-www-form-urlencoded'"
         requestTemplates:
           application/json: "#set($topic=\"${topic_arn}\")\n#set($msg=$input.path('$.message'))\nAction=Publish&TopicArn=$util.urlEncode($topic)&Message=$util.urlEncode($msg)"
-          application/x-www-form-urlencoded: "#set($topic=\"${topic_arn}\")\n#set($msg=$input.body)\nAction=Publish&TopicArn=$util.urlEncode($topic)&Message=$util.urlEncode($msg)"
+          application/x-www-form-urlencoded: "#set($topic=\"${topic_arn}\")\n#set($msg=$input.body)\n#set( $elements = $msg.split('&') )\n#set( $keyVal = $elements[0].split('=') )\n#if(!$keyVal[1].contains(\"_\"))\nAction=Publish&TopicArn=$util.urlEncode($topic)&Message=$util.urlEncode($msg)\n#end"
         responses:
           200: 
             statusCode: "302"
