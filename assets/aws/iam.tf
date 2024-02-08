@@ -3,7 +3,7 @@ data "aws_iam_policy_document" "assume_role" {
     effect = "Allow"
     principals {
       type        = "Service"
-      identifiers = [for id in local.config.apigw.iam.assume_role_identifiers : id]
+      identifiers = [for id in local.config.apigw.main.iam.assume_role_identifiers : id]
     }
     actions = ["sts:AssumeRole"]
   }
@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "sns" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = local.config.sns.topic_name
+  name               = local.config.sns.main.topic_name
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
   inline_policy {
     name   = "sns_policy"

@@ -1,9 +1,9 @@
 resource "aws_sns_topic" "this" {
-  name = local.config.sns.topic_name
+  name = local.config.sns.main.topic_name
 }
 
 resource "aws_sns_topic_subscription" "this" {
-  for_each  = local.config.sns.subscriptions
+  for_each  = local.config.sns.main.subscriptions
   topic_arn = aws_sns_topic.this.arn
   protocol  = each.value.protocol
   endpoint  = each.value.endpoint

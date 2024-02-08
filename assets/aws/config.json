@@ -8,27 +8,49 @@
         }
     },
     "sns": {
-        "topic_name": "noooner-ltd-contact-form",
-        "subscriptions": {
-            "jussi": {
-                "protocol": "email",
-                "endpoint": "jussi.heinonen@noooner.ltd"
+        "main": {
+            "topic_name": "noooner-ltd-contact-form",
+            "subscriptions": {
+                "jussi": {
+                    "protocol": "email",
+                    "endpoint": "jussi.heinonen@noooner.ltd"
+                }
+
             }
+        },
+        "trial": {
+            "topic_name": "noooner-ltd-contact-form-trial"
 
         }
     },
     "apigw": {
-        "name": "receive-form-data",
-        "description": "REST API Gateway from OpenAPI definition receive-form-data.template.tf",
-        "stage_name": "dev",
-        "context_path": "submit",
-        "endpoint_configuration_types": ["REGIONAL"],
-        "openapi_template_path": "config/receive-form-data.template.tf",
-        "openapi_template_vars": {
-            "context_path": "submit"
+        "main": {
+            "name": "receive-form-data",
+            "description": "REST API Gateway from OpenAPI definition receive-form-data.template.tf",
+            "stage_name": "dev",
+            "context_path": "submit",
+            "endpoint_configuration_types": ["REGIONAL"],
+            "openapi_template_path": "config/receive-form-data.template.tf",
+            "openapi_template_vars": {
+                "context_path": "submit"
+            },
+            "iam": {
+                "assume_role_identifiers": [ "apigateway.amazonaws.com", "sns.amazonaws.com" ]
+            }
         },
-        "iam": {
-            "assume_role_identifiers": [ "apigateway.amazonaws.com", "sns.amazonaws.com" ]
+        "trial": {
+            "name": "receive-trial-data",
+            "description": "API Gateway for noooner.ltd/free trial form submission",
+            "stage_name": "dev",
+            "context_path": "submit",
+            "endpoint_configuration_types": ["REGIONAL"],
+            "openapi_template_path": "config/receive-trial-data.template.tf",
+            "openapi_template_vars": {
+                "context_path": "submit"
+            },
+            "iam": {
+                "assume_role_identifiers": [ "apigateway.amazonaws.com", "sns.amazonaws.com" ]
+            }
         }
     }
     
