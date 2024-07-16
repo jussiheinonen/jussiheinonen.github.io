@@ -21,6 +21,10 @@
         "trial": {
             "topic_name": "noooner-ltd-contact-form-trial"
 
+        },
+        "jakob": {
+            "topic_name": "jakobheinonen-github-io-contact-form"
+
         }
     },
     "apigw": {
@@ -45,6 +49,20 @@
             "context_path": "submit",
             "endpoint_configuration_types": ["REGIONAL"],
             "openapi_template_path": "config/receive-trial-data.template.tf",
+            "openapi_template_vars": {
+                "context_path": "submit"
+            },
+            "iam": {
+                "assume_role_identifiers": [ "apigateway.amazonaws.com", "sns.amazonaws.com" ]
+            }
+        },
+        "jakob": {
+            "name": "jakobheinonen-github-io-contact-form",
+            "description": "API Gateway for jakobheinonen.github.io form submission",
+            "stage_name": "dev",
+            "context_path": "submit",
+            "endpoint_configuration_types": ["REGIONAL"],
+            "openapi_template_path": "config/jakobheinonen.github.io.template.tf",
             "openapi_template_vars": {
                 "context_path": "submit"
             },
